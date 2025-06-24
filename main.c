@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "libchunk/chunk.h"
+#include "libchunk/chunkcli.h"
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
@@ -7,11 +8,12 @@ int main(void)
 
 {
     int width=0, height=0, depth=0;
-    char*** chunk = read_chunk(&width, &height, &depth);
+    char*** chunk = read_chunk_file(&width, &height, &depth);
 
     // Procesare chunk
 
     print_chunk(chunk, width, height, depth);
+    print_block_chunk(chunk,width,height,depth,0,0,0);
     // Initialization
     //--------------------------------------------------------------------------------------
     const int screenWidth = 1800;
@@ -51,8 +53,7 @@ int main(void)
 
         BeginMode3D(camera);
 
-        DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
-        DrawCube(anotherCubePosition, 2.0f, 2.0f, 2.0f, BLUE);
+        render_chunk(chunk, width, height, depth);
         DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
 
         DrawGrid(10, 1.0f);
