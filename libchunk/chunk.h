@@ -9,10 +9,22 @@
 #define BLOCK_WOOD      2
 #define BLOCK_STONE      3
 
-typedef char*** chunk_t;
-void render_chunk(chunk_t chunk, int width, int height, int depth);
+#include <raylib.h>
 
+typedef char*** chunk_t;
+typedef struct {
+    int x,y,z;
+} Vector3_t;
+
+Camera3D init_camera();
+void render_chunk(const chunk_t chunk, const Vector3_t size);
+void free_chunk(chunk_t chunk, const Vector3_t size);
+chunk_t place_block( chunk_t chunk, const Vector3_t size, const Vector3_t position, char block);
+chunk_t allocate_chunk(const Vector3_t size);
 chunk_t chunk_place_block(chunk_t chunk, int width, int height, int depth, int x, int y, int z, char block);
-chunk_t chunk_fill_cuboid(chunk_t chunk, int width, int height, int depth, int x0,int y0,int z0, int x1,int y1,int z1, char block);
-chunk_t chunk_fill_sphere(chunk_t chunk, int width, int height, int depth, int x, int y, int z, int radius, char block);
+
+chunk_t chunk_fill_cuboid(chunk_t chunk, const Vector3_t chunk_size,
+    const Vector3_t p1, const Vector3_t p2, char block);
+chunk_t chunk_fill_sphere(chunk_t chunk, const Vector3_t chunk_size,
+    const Vector3_t position, double radius, char block);
 #endif //CHUNK_H

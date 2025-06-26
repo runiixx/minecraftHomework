@@ -25,26 +25,27 @@ chunk_t read_chunk_file(int *width, int *height, int *depth) {
 
     return chunk;
 }
-void print_block_chunk(chunk_t chunk, int width, int height, int depth, int x, int y, int z) {
-    if (x < 0 || x >=width) {
+void print_block_chunk(chunk_t chunk, const Vector3_t chunk_size, const  Vector3_t block_position) {
+    if (block_position.x < 0 || block_position.x >= chunk_size.x) {
         printf("ERROR: X coordinate is not valid\n");
         return;
     }
-    if (y < 0 || y >= height) {
+    if (block_position.y < 0 || block_position.y >= chunk_size.y) {
         printf("ERROR: Y coordinate is not valid\n");
         return;
     }
-    if (z < 0 || z >= depth) {
+    if (block_position.z < 0 || block_position.z >= chunk_size.z) {
         printf("ERROR: Z coordinate is not valid\n");
         return;
     }
-    printf("Block %d at X:%d Y:%d Z:%d\n",chunk[x][y][z],x,y,z);
+    printf("Block %d at X:%d Y:%d Z:%d\n",chunk[block_position.x][block_position.y][block_position.z],
+        block_position.x,block_position.y,block_position.z);
 }
-void print_chunk(chunk_t chunk, int width, int height, int depth) {
-    printf("Chunk: width-%d, height-%d, depth-%d", width, height, depth);
-    for (int x  = 0; x < width; x++) {
-        for (int y  = 0; y < height; y++) {
-            for (int z  = 0; z < depth; z++) {
+void print_chunk(chunk_t chunk, Vector3_t size) {
+    printf("Chunk: width-%d, height-%d, depth-%d", size.x, size.y, size.z);
+    for (int x  = 0; x < size.x; x++) {
+        for (int y  = 0; y < size.y; y++) {
+            for (int z  = 0; z < size.z; z++) {
                 printf("%d ",chunk[x][y][z]);
 
             }
