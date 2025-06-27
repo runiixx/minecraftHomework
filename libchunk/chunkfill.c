@@ -28,7 +28,7 @@ chunk_t chunk_fill_cuboid(chunk_t chunk, const Vector3_t chunk_size,
         for (int y = min(p1.y, p2.y); y <= max(p1.y, p2.y); y++) {
             for (int z = min(p1.z, p2.z); z <= max(p1.z, p2.z); z++) {
                 chunk = place_block(chunk, chunk_size, (Vector3_t){x,y,z}, block);
-                render_chunk(chunk, chunk_size);
+                //render_chunk(chunk, chunk_size);
             }
         }
     }
@@ -41,7 +41,7 @@ chunk_t chunk_fill_sphere(chunk_t chunk, const Vector3_t chunk_size,
             for (int z = position.z - (int)ceil(radius);z <= position.z + (int)ceil(radius);z++) {
                 if (calculate_distance(position, (Vector3_t){x,y,z}) < radius) {
                     chunk = place_block(chunk, chunk_size, (Vector3_t){x,y,z}, block);
-                    render_chunk(chunk, chunk_size);
+                    //render_chunk(chunk, chunk_size);
                 }
             }
         }
